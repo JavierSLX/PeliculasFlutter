@@ -51,17 +51,22 @@ class MovieHorizontal extends StatelessWidget {
 
   //Crea una tarjeta de pelicula
   Widget _tarjeta(BuildContext context, Pelicula pelicula){
-    return Container(
+    pelicula.uniqueId = '${pelicula.id}-poster';
+    final tarjeta = Container(
         margin: EdgeInsets.only(right: 15),
         child: Column(
           children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: FadeInImage(
-                image: NetworkImage(pelicula.getPosterImg()),
-                placeholder: AssetImage("assets/photo.jpg"),
-                fit: BoxFit.cover,
-                height: 160,
+            //Hero sirve para hacer el efecto de transicion de imagen de una pagina a otra
+            Hero(
+              tag: pelicula.uniqueId,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: FadeInImage(
+                  image: NetworkImage(pelicula.getPosterImg()),
+                  placeholder: AssetImage("assets/photo.jpg"),
+                  fit: BoxFit.cover,
+                  height: 160,
+                ),
               ),
             ),
             SizedBox(height: 5,),
@@ -73,6 +78,16 @@ class MovieHorizontal extends StatelessWidget {
           ],
         ),
       );
+
+    //Widget que sirve para detectar un evento en este caso un click o un tap
+    return GestureDetector(
+      child: tarjeta,
+      //Cuando se le da click a la tarjeta
+      onTap: (){
+        //Pasa a la pagina de detalle de la pelicula (le pasa como argumento la pelicula)
+        Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+      },
+    );
   }
 
   List<Widget> _tajetas(BuildContext context) {

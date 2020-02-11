@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/pages/homePage.dart';
+import 'package:peliculas/src/pages/peliculaDetalle.dart';
 
 // ALT + Flecha mueve la linea de codigo
 // El snipper "mateapp" genera todo el codigo inicial
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (BuildContext context) => HomePage(),
+        'detalle': (BuildContext context) => PeliculaDetalle(),
       },
     );
   }

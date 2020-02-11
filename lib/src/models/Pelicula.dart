@@ -23,6 +23,7 @@ class Peliculas
 //Clase que permite crear una instancia Pelicula
 class Pelicula 
 {
+  String uniqueId;
   double popularity;
   int voteCount;
   bool video;
@@ -80,5 +81,13 @@ class Pelicula
       return "https://www.shareicon.net/data/2015/10/14/655997_image_512x512.png";
     else
       return "https://image.tmdb.org/t/p/w500$posterPath";
+  }
+
+  getBackgroundImg()
+  {
+    if(posterPath == null)
+      return "https://www.shareicon.net/data/2015/10/14/655997_image_512x512.png";
+    else
+      return "https://image.tmdb.org/t/p/w500$backdropPath";
   }
 }

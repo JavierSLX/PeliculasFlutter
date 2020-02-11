@@ -22,14 +22,23 @@ class CardSwiper extends StatelessWidget {
       //El elemento Swiper que permite ver varias imagenes en forma de cascada
       child: Swiper(
         itemBuilder: (BuildContext context, int index){
-          //Widget con border redondeados con una imagen
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(
-              image: NetworkImage(peliculas[index].getPosterImg()),
-              placeholder: AssetImage("assets/photo.jpg"),
-              fit: BoxFit.cover,
-            )
+          peliculas[index].uniqueId = '${peliculas[index].id}-tarjeta';
+          //Hero se encarga de dar efecto de transicion de imagen entre paginas
+          return Hero(
+            tag: peliculas[index].uniqueId,
+            //Widget con border redondeados con una imagen
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              //Al dar click sobre la imagen manda a la pagina de descripcion
+              child: GestureDetector(
+                child: FadeInImage(
+                  image: NetworkImage(peliculas[index].getPosterImg()),
+                  placeholder: AssetImage("assets/photo.jpg"),
+                  fit: BoxFit.cover,
+                ),
+                onTap: () => Navigator.pushNamed(context, 'detalle', arguments: peliculas[index]),
+              )
+            ),
           );
         },
         //70% del ancho
