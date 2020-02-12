@@ -100,4 +100,17 @@ class PeliculaProvider
 
     return cast.actores;
   }
+
+  //Regresa la lista de peliculas en base a una petición
+  Future<List<Pelicula>> buscarPelicula(String query) async
+  {
+    //Construye la url de peticion
+    final url = Uri.https(_url, "3/search/movie/", {
+      'api_key': _apikey,
+      'language': _language,
+      'query': query
+    });
+
+    return await _procesarRespuesta(url);
+  }
 }
